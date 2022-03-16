@@ -70,6 +70,7 @@ const updateAllNfcs = (request, response) => {
 }
 
 module.exports = {
+	setNfcs,
     getNfcs,
     getNfcStatusById,
     updateSwipedNfc,
