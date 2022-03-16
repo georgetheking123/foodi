@@ -12,7 +12,7 @@ app.use(
   })
 )
 
-app.get('/', "This is working")
+app.get('/', db.getNfcs)
 app.get('/nfcs', db.getNfcs)
 app.get('/nfcs/:id', db.getNfcStatusById)
 app.patch('/nfcs/:id', db.updateSwipedNfc)
