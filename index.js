@@ -14,6 +14,7 @@ app.use(
 )
 
 app.get('/', db.setNfcs)
+app.get('/nfcs/add/:id', db.addNfc)
 app.get('/nfcs', db.getNfcs)
 app.get('/nfcs/:id', db.getNfcStatusById)
 app.patch('/nfcs/:id', db.updateSwipedNfc)
