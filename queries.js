@@ -32,8 +32,9 @@ const getNfcs = async (request, response) => {
     await pool.query('SELECT * FROM nfcs', (error, results) => {
       if (error) {
         console.log(error);
-      }
+      } else {
       response.status(200).json(results.rows)
+      }
     })
 }
 
@@ -42,8 +43,9 @@ const getNfcStatusById = async ({ params: { id }}, response) => {
 	await pool.query(`SELECT was_swiped FROM nfcs WHERE nfc_id = '${parseInt(id)}'`, (error, results) => {
     if (error) {
       console.log(error);
-    }
+    } else {
       response.status(200).json(results.rows)
+    }
     })
 	} catch (error) {
 		console.log(error)
@@ -57,8 +59,9 @@ const updateSwipedNfc = async (request, response) => {
     await pool.query(`UPDATE nfcs SET was_swiped = true WHERE nfc_id = '${id}'`, (error, results) => {
       if (error) {
         console.log(error);
-      }
+      } else {
       response.status(200)
+      }
     })
 	} catch (error) {
 		console.log(error)
@@ -69,8 +72,9 @@ const updateAllNfcs = async (request, response) => {
     await pool.query(`UPDATE nfcs SET was_swiped = false`, (error, results) => {
       if (error) {
         console.log(error);
-      }
+      } else {
       response.status(200)
+      }
     })
 }
 
