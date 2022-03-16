@@ -18,7 +18,7 @@ app.get('/nfcs/add/:id', db.addNfc)
 app.get('/nfcs', db.getNfcs)
 app.get('/nfcs/:id', db.getNfcStatusById)
 app.patch('/nfcs/:id', db.updateSwipedNfc)
-app.patch('/nfcs', db.updateAllNfcs)
+app.get('/nfcs/reset', db.updateAllNfcs)
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
