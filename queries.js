@@ -17,6 +17,10 @@ const setNfcs = async (req, res) => {
 
 }
 
+const addNfc = async ({ params: { id }}, res) => {
+  await pool.query(`INSERT INTO nfcs(nfc_id) VALUES('${id}');`)	
+}
+
 const getNfcs = async (request, response) => {
     await pool.query('SELECT * FROM nfcs', (error, results) => {
       if (error) {
@@ -60,5 +64,6 @@ module.exports = {
     getNfcs,
     getNfcStatusById,
     updateSwipedNfc,
-    updateAllNfcs
+    updateAllNfcs,
+    addNfc
 };
