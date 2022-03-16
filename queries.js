@@ -10,23 +10,11 @@ const pool = new Pool({
 })
 
 const setNfcs = (req, res) => {
-  pool.query("DROP TABLE IF EXISTS nfcs;
+  pool.query('DROP TABLE IF EXISTS nfcs;')
+  pool.query('CREATE TABLE nfcs (nfc_id bigint PRIMARY KEY, was_swiped BOOLEAN DEFAULT false);')
+  pool.query('INSERT INTO nfcs(nfc_id) VALUES('41052215');')
+  pool.query('INSERT INTO nfcs(nfc_id) VALUES('41052212');')
 
-CREATE TABLE nfcs (
-	nfc_id bigint PRIMARY KEY,
-	was_swiped BOOLEAN DEFAULT false
-);
-
-INSERT INTO nfcs(nfc_id)
-VALUES('41052215');
-
-INSERT INTO nfcs(nfc_id)
-VALUES('41052212');", (err, results) => {
-if (error) {
-        throw error
-      }
-      response.status(200).json(results.rows)
-    })
 }
 
 const getNfcs = (request, response) => {
