@@ -10,36 +10,52 @@ const pool = new Pool({
 })
 
 const setNfcs = async (req, res) => {
+	try{
   await pool.query('DROP TABLE IF EXISTS nfcs;')
   await pool.query('CREATE TABLE nfcs (nfc_id bigint PRIMARY KEY, was_swiped BOOLEAN DEFAULT false);')
   await pool.query("INSERT INTO nfcs(nfc_id) VALUES('41052215');")
   await pool.query("INSERT INTO nfcs(nfc_id) VALUES('41052212');")
-
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 const addNfc = async ({ params: { id }}, res) => {
+	try {
   await pool.query(`INSERT INTO nfcs(nfc_id) VALUES('${id}');`)	
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 const getNfcs = async (request, response) => {
+	try {
     await pool.query('SELECT * FROM nfcs', (error, results) => {
       if (error) {
         throw error
       }
       response.status(200).json(results.rows)
     })
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 const getNfcStatusById = async ({ params: { id }}, response) => {
-    await pool.query(`SELECT was_swiped FROM nfcs WHERE nfc_id = '${parseInt(id)}'`, (error, results) => {
+    try {
+	await pool.query(`SELECT was_swiped FROM nfcs WHERE nfc_id = '${parseInt(id)}'`, (error, results) => {
       if (error) {
         throw error
       }
       response.status(200).json(results.rows)
     })
+	} catch (error) {
+		console.log(error)
+	}
   }
 
 const updateSwipedNfc = async (request, response) => {
+	try {
     const id = parseInt(request.params.id)
   
     await pool.query(`UPDATE nfcs SET was_swiped = true WHERE nfc_id = '${id}'`, (error, results) => {
@@ -48,15 +64,22 @@ const updateSwipedNfc = async (request, response) => {
       }
       response.status(200)
     })
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 const updateAllNfcs = async (request, response) => {
+	try {
     await pool.query(`UPDATE nfcs SET was_swiped = false`, (error, results) => {
       if (error) {
         throw error
       }
       response.status(200)
     })
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = {
