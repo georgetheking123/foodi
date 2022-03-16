@@ -17,8 +17,8 @@ const setNfcs = async (req, res) => {
 
 }
 
-const getNfcs = (request, response) => {
-    pool.query('SELECT * FROM nfcs', (error, results) => {
+const getNfcs = async (request, response) => {
+    await pool.query('SELECT * FROM nfcs', (error, results) => {
       if (error) {
         throw error
       }
@@ -26,10 +26,8 @@ const getNfcs = (request, response) => {
     })
 }
 
-const getNfcStatusById = (request, response) => {
-    const id = parseInt(request.params.id)
-  
-    pool.query(`SELECT was_swiped FROM nfcs WHERE nfc_id = '${id}'`, (error, results) => {
+const getNfcStatusById = async ({ params: { id }}, response) => {
+    await pool.query(`SELECT was_swiped FROM nfcs WHERE nfc_id = '${parseInt(id)}'`, (error, results) => {
       if (error) {
         throw error
       }
@@ -37,10 +35,10 @@ const getNfcStatusById = (request, response) => {
     })
   }
 
-const updateSwipedNfc = (request, response) => {
+const updateSwipedNfc = async (request, response) => {
     const id = parseInt(request.params.id)
   
-    pool.query(`UPDATE nfcs SET was_swiped = true WHERE nfc_id = '${id}'`, (error, results) => {
+    await pool.query(`UPDATE nfcs SET was_swiped = true WHERE nfc_id = '${id}'`, (error, results) => {
       if (error) {
         throw error
       }
@@ -48,8 +46,8 @@ const updateSwipedNfc = (request, response) => {
     })
 }
 
-const updateAllNfcs = (request, response) => {
-    pool.query(`UPDATE nfcs SET was_swiped = false`, (error, results) => {
+const updateAllNfcs = async (request, response) => {
+    await pool.query(`UPDATE nfcs SET was_swiped = false`, (error, results) => {
       if (error) {
         throw error
       }
