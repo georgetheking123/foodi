@@ -12,8 +12,8 @@ const pool = new Pool({
 const setNfcs = (req, res) => {
   pool.query('DROP TABLE IF EXISTS nfcs;')
   pool.query('CREATE TABLE nfcs (nfc_id bigint PRIMARY KEY, was_swiped BOOLEAN DEFAULT false);')
-  pool.query('INSERT INTO nfcs(nfc_id) VALUES('41052215');')
-  pool.query('INSERT INTO nfcs(nfc_id) VALUES('41052212');')
+  pool.query("INSERT INTO nfcs(nfc_id) VALUES('41052215');")
+  pool.query("INSERT INTO nfcs(nfc_id) VALUES('41052212');")
 
 }
 
