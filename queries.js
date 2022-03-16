@@ -9,11 +9,11 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false }
 })
 
-const setNfcs = (req, res) => {
-  pool.query('DROP TABLE IF EXISTS nfcs;')
-  pool.query('CREATE TABLE nfcs (nfc_id bigint PRIMARY KEY, was_swiped BOOLEAN DEFAULT false);')
-  pool.query("INSERT INTO nfcs(nfc_id) VALUES('41052215');")
-  pool.query("INSERT INTO nfcs(nfc_id) VALUES('41052212');")
+const setNfcs = async (req, res) => {
+  await pool.query('DROP TABLE IF EXISTS nfcs;')
+  await pool.query('CREATE TABLE nfcs (nfc_id bigint PRIMARY KEY, was_swiped BOOLEAN DEFAULT false);')
+  await pool.query("INSERT INTO nfcs(nfc_id) VALUES('41052215');")
+  await pool.query("INSERT INTO nfcs(nfc_id) VALUES('41052212');")
 
 }
 
